@@ -1,17 +1,11 @@
 import { Dispatch } from "react";
 import { QuizAppActionType } from "../type";
+import { useQuiz } from "../contexts/QuizContext";
 
-type NextButtonProps = {
-  answer: null | number;
-  dispatch: Dispatch<QuizAppActionType>;
-  finish: boolean;
-};
+export default function NextButton() {
+  const { answer, index, questions, dispatch } = useQuiz();
+  const finish = index === questions.length - 1;
 
-export default function NextButton({
-  answer,
-  finish,
-  dispatch,
-}: NextButtonProps) {
   if (answer === null) return null;
 
   if (finish)

@@ -1,19 +1,14 @@
 import { Dispatch } from "react";
 import { QuizAppActionType } from "../type";
+import { useQuiz } from "../contexts/QuizContext";
 
-type FinishScreenProps = {
-  points: number;
-  totalPoints: number;
-  highScore: number;
-  dispatch: Dispatch<QuizAppActionType>;
-};
+export default function FinishScreen() {
+  const { points, questions, highScore, dispatch } = useQuiz();
 
-export default function FinishScreen({
-  points,
-  totalPoints,
-  highScore,
-  dispatch,
-}: FinishScreenProps) {
+  const totalPoints = questions.reduce(
+    (total, question) => total + question.points,
+    0
+  );
   const percentage = Math.round((points / totalPoints) * 100);
 
   return (

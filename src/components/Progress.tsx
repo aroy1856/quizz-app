@@ -1,18 +1,16 @@
-type ProgressProps = {
-  currQuestion: number;
-  totalQuestions: number;
-  points: number;
-  totalPoints: number;
-  answer: number | null;
-};
+import { useQuiz } from "../contexts/QuizContext";
 
-export default function Progress({
-  currQuestion,
-  totalQuestions,
-  points,
-  totalPoints,
-  answer,
-}: ProgressProps) {
+export default function Progress() {
+  const { questions, index, points, answer } = useQuiz();
+
+  const currQuestion = index;
+  const totalQuestions = questions.length;
+
+  const totalPoints = questions.reduce(
+    (total, question) => total + question.points,
+    0
+  );
+
   return (
     <div className="progress">
       <progress
